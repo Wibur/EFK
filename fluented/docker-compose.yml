@@ -1,0 +1,16 @@
+version: "3"
+services:
+
+  fluentd:
+      build: ./plugins
+      volumes:
+        - ./fluentd/conf/:/fluentd/etc/
+      ports:
+        - "24224:24224"
+        - "24224:24224/udp"
+      networks:
+        - efk_service
+
+networks:
+  efk_service:
+    external: true

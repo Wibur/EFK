@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:2.0.0
+    container_name: portainer
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 掛載設定檔
+      # - ${VOLUME_PATH}/portainer:/data
+    # labels:
+    #   # Portainer
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.portainer.rule=Host(`portainer.local.com`)"
+    #   - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+    #   - "traefik.http.routers.portainer.service=portainer"
+    networks:
+      - efk_service
+
+networks:
+  efk_service:
+    external: true
