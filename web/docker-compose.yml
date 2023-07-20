@@ -2,7 +2,7 @@ version: '3'
 services:
 
     golang-http:
-      image: neil605164/hello-go:v0.0.4
+      image: vancer9527/go-http:v1.0.0
       logging:
         driver: "fluentd"
         options:
@@ -10,7 +10,7 @@ services:
       container_name: golang-http
       restart: always
       ports:
-        - 8080:8080
+        - 9527:9527
       networks:
         - efk_service
 
