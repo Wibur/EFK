@@ -8,7 +8,9 @@ services:
     environment:
       - node.name=es01
       - cluster.name=es-cluster
-      - cluster.initial_master_nodes=es01,es02,es03
+      # 首次啟動時 會自動選出一個適合當master的節點,因此須設定適合當master的節點
+      - cluster.initial_master_nodes=es01
+      # 集群中的节点可以彼此发现并选举一个主节点,因此不能寫自己
       - discovery.seed_hosts=es02,es03
       # 不信任的ssl憑證
       - xpack.security.enabled=false
@@ -35,7 +37,7 @@ services:
     environment:
       - node.name=es02
       - cluster.name=es-cluster
-      - cluster.initial_master_nodes=es01,es02,es03
+      # - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es03
       # 不信任的ssl憑證
       - xpack.security.enabled=false
@@ -58,7 +60,7 @@ services:
     environment:
       - node.name=es03
       - cluster.name=es-cluster
-      - cluster.initial_master_nodes=es01,es02,es03
+      # - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es02
       # 不信任的ssl憑證
       - xpack.security.enabled=false
