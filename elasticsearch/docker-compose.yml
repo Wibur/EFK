@@ -14,9 +14,10 @@ services:
       - discovery.seed_hosts=es02,es03
       # 不信任的ssl憑證
       - xpack.security.enabled=false
+      # ES_JAVA_OPTS 是es進程使用的環境變數,用來設定JVM參數
+      # -Xms1g 是JVM的參數 用來設定JVM初始內存大小 1g=1GB
+      # -Xmx1g 是JVM的參數 用來設定JVM最大內存大小 1g=1GB
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-    # volumes:
-      # - data01:/usr/share/elasticsearch/data
     # 一定要加 不然進程數過大 會導致node拉不起來
     ulimits:
       memlock:
@@ -42,8 +43,6 @@ services:
       # 不信任的ssl憑證
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-    # volumes:
-      # - data02:/usr/share/elasticsearch/data
     ulimits:
       memlock:
         soft: -1
@@ -65,22 +64,12 @@ services:
       # 不信任的ssl憑證
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-    # volumes:
-      # - data03:/usr/share/elasticsearch/data
     ulimits:
       memlock:
         soft: -1
         hard: -1
     networks:
       - efk_service
-
-# volumes:
-#   data01:
-#     driver: local
-#   data02:
-#     driver: local
-#   data03:
-#     driver: local
 
 networks:
   efk_service:
